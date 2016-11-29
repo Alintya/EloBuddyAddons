@@ -55,12 +55,12 @@ namespace JungleTimer
             Size = RootMenu["size"].Cast<Slider>().CurrentValue;
             txt = new Text("", new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, Size, System.Drawing.FontStyle.Bold));
 
-            Game.OnProcessPacket += Game_OnProcessPacket;
+//            Game.OnProcessPacket += Game_OnProcessPacket;
             GameObject.OnCreate += GameObject_OnCreate;
             GameObject.OnDelete += GameObject_OnDelete;
             Drawing.OnEndScene += Drawing_OnEndScene;
-            Game.OnTick += Game_OnTick;
-            Drawing.OnDraw += Drawing_OnDraw;
+//            Game.OnTick += Game_OnTick;
+//            Drawing.OnDraw += Drawing_OnDraw;
         }
 
         private static void Game_OnProcessPacket(GamePacketEventArgs args)
