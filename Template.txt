@@ -1,0 +1,102 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using EloBuddy;
+using EloBuddy.SDK;
+using EloBuddy.SDK.Events;
+using EloBuddy.SDK.Menu;
+using EloBuddy.SDK.Menu.Values;
+using SharpDX;
+using EloBuddy.SDK.Rendering;
+using Color1 = System.Drawing.Color;
+using System.Drawing;
+
+namespace AddonTemplate
+{
+    class Program
+    {
+        private static AIHeroClient Player { get { return ObjectManager.Player; } }
+
+        private static Menu RootMenu, ComboMenu, HarassMenu, FarmingMenu;
+
+        static void Main(string[] args)
+        {
+            Loading.OnLoadingComplete += Loading_OnLoadingComplete;
+        }
+
+        private static void Loading_OnLoadingComplete(EventArgs args)
+        {
+            if (Player.ChampionName != "Abella Anderson") return;
+
+            RootMenu = MainMenu.AddMenu("displayName", "id");
+
+            ComboMenu = RootMenu.AddSubMenu("displayName", "id");
+            {
+                // Add items here
+            }
+
+            HarassMenu = RootMenu.AddSubMenu("displayName", "id");
+            {
+                // Add items here
+            }
+
+            FarmingMenu = RootMenu.AddSubMenu("displayName", "id");
+            {
+                // Add items here
+            }
+
+            Game.OnTick += Game_OnTick;
+            Drawing.OnDraw += Drawing_OnDraw;
+        }
+
+        private static void Game_OnTick(EventArgs args)
+        {
+            switch (Orbwalker.ActiveModesFlags)
+            {
+                case Orbwalker.ActiveModes.Combo:
+                    break;
+                case Orbwalker.ActiveModes.Flee:
+                    break;
+                case Orbwalker.ActiveModes.Harass:
+                    break;
+                case Orbwalker.ActiveModes.JungleClear:
+                    break;
+                case Orbwalker.ActiveModes.LaneClear:
+                    break;
+                case Orbwalker.ActiveModes.LastHit:
+                    break;
+                case Orbwalker.ActiveModes.None:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private static void Drawing_OnDraw(EventArgs args)
+        {
+
+        }
+
+        private static void Combo()
+        {
+
+        }
+
+        private static void Flee()
+        {
+
+        }
+
+        private static void Harass()
+        {
+
+        }
+
+        private static void Farm()
+        {
+
+        }
+    }
+}
