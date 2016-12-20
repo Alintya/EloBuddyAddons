@@ -30,7 +30,7 @@ namespace JungleTimer
 
         private static AIHeroClient Player { get { return ObjectManager.Player; } }
 
-        private static Menu RootMenu;
+        public static Menu RootMenu;
 
         static void Main(string[] args)
         {
@@ -44,11 +44,20 @@ namespace JungleTimer
             Bootstrap.Init(null);
             LoadJungleCreeps();
 
+            int smiteoff = AutoSmite.Init();
+
             RootMenu = MainMenu.AddMenu("JungleTimers", "jungletimers");
-            RootMenu.AddGroupLabel("Settings");
+            RootMenu.AddGroupLabel("Timer Settings");
             RootMenu.Add("enabled", new CheckBox("Enabled", true));
             RootMenu.AddSeparator();
             RootMenu.Add("size", new Slider("Text Size", 6, 1, 20));
+
+            RootMenu.AddSeparator();
+            if (smiteoff == 0)
+                AutoSmite.AddSmiteMenu(RootMenu);
+            else
+                Chat.Print("AutoSmite Unavailable");
+
             RootMenu.AddSeparator();
             RootMenu.AddLabel("Made by StormyZuse at EB.");
 
@@ -59,8 +68,13 @@ namespace JungleTimer
             GameObject.OnCreate += GameObject_OnCreate;
             GameObject.OnDelete += GameObject_OnDelete;
             Drawing.OnEndScene += Drawing_OnEndScene;
-//            Game.OnTick += Game_OnTick;
-//            Drawing.OnDraw += Drawing_OnDraw;
+
+            if(smiteoff == 0)
+            {
+                Game.OnUpdate += AutoSmite.Game_OnUpdate;
+                Drawing.OnDraw += AutoSmite.Drawing_OnDraw;
+            }
+            //            Game.OnTick += Game_OnTick;
         }
 
         private static void Game_OnProcessPacket(GamePacketEventArgs args)
@@ -521,13 +535,13 @@ namespace JungleTimer
             {
                 return;
             }
-
+/*
             if(!sender.Name.ToLower().StartsWith("minion"))
             {
                 Console.WriteLine(sender.Name.ToLower() + " Team: " + sender.Team.ToString());
                 
             }
-                
+*/                
 
             var mob =
                 JungleCreeps.FirstOrDefault(

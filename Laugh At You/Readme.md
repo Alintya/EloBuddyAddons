@@ -1,0 +1,1 @@
+After Killing a Champion or after casting something you set in the menu, your champ will laugh and/or use mastery badge.
